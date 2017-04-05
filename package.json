@@ -1,0 +1,45 @@
+{
+  "name": "admin",
+  "version": "0.0.1",
+  "description": "gamma admin",
+  "main": "server/index.js",
+  "repository": "https://github.com/hypergamma/admin.git",
+  "author": "cacaocake",
+  "license": "None",
+  "dependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-1": "^6.16.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "body-parser": "^1.15.2",
+    "chart.js": "^2.4.0",
+    "express": "^4.14.0",
+    "generic-pool": "^3.1.4",
+    "influx": "^5.0.3",
+    "lodash.find": "^4.6.0",
+    "mariasql": "^0.2.6",
+    "react": "^15.4.1",
+    "react-chartjs-2": "^1.5.6",
+    "react-dom": "^15.4.1",
+    "react-redux": "^4.4.6",
+    "react-router5": "^4.0.1",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.7.4",
+    "redux-router5": "^4.2.3",
+    "redux-thunk": "^2.1.0",
+    "reselect": "^2.5.4",
+    "router5": "^4.3.4",
+    "superagent": "^3.1.0",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0"
+  },
+  "scripts": {
+    "start": "node server/index.js"
+  }
+}
