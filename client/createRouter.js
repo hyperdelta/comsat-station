@@ -17,6 +17,5 @@ export default function configureRouter(routes, useListenersPlugin = false) {
   if (useListenersPlugin) {
     router.usePlugin(listenersPlugin());
   }
-
   return router;
 }

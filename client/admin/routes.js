@@ -1,8 +1,9 @@
 const routes = {
   routes: [
-    { name: 'addfunc', path: '/addfunc' }
+    { name: 'addfunc', path: '/addfunc' },
+    { name: 'dashboard', path: '/dashboard' }
   ],
-  defaultRoute: 'addfunc'
+  defaultRoute: 'dashboard'
 };
 
 export default routes

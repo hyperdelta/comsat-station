@@ -1,9 +1,9 @@
 {
-  "name": "admin",
+  "name": "comsat-station",
   "version": "0.0.1",
-  "description": "gamma admin",
+  "description": "Comsat Station: Admin layer for hyperdelta",
   "main": "server/index.js",
-  "repository": "https://github.com/hypergamma/admin.git",
+  "repository": "https://github.com/hyperdelta/comsat-station",
   "author": "cacaocake",
   "license": "None",
   "dependencies": {
@@ -16,14 +16,17 @@
     "babel-preset-stage-2": "^6.18.0",
     "body-parser": "^1.15.2",
     "chart.js": "^2.4.0",
+    "deck.gl": "^4.0.6",
     "express": "^4.14.0",
     "generic-pool": "^3.1.4",
     "influx": "^5.0.3",
     "lodash.find": "^4.6.0",
+    "luma.gl": "^3.0.2",
     "mariasql": "^0.2.6",
     "react": "^15.4.1",
     "react-chartjs-2": "^1.5.6",
     "react-dom": "^15.4.1",
+    "react-map-gl": "^1.8.2",
     "react-redux": "^4.4.6",
     "react-router5": "^4.0.1",
     "redux": "^3.6.0",
@@ -37,9 +40,11 @@
     "webpack-dev-server": "^1.16.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0"
+    "babel-cli": "^6.24.1",
+    "json-loader": "^0.5.4"
   },
   "scripts": {
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "build": "node_modules/.bin/webpack"
   }
 }

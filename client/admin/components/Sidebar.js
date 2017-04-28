@@ -37,7 +37,7 @@ class Sidebar extends Component {
         <nav className="sidebar-nav">
           <ul className="nav">
             <li className="nav-title">
-              Pop Art
+              Hyper Delta
             </li>
             <NavItem router={this.router} navigateTo={navigateTo} name="dashboard">
               <i className="icon-speedometer"></i> Dashboard
@@ -46,10 +46,10 @@ class Sidebar extends Component {
               Management
             </li>
             <li className="nav-item nav-dropdown">
-              <a className="nav-link nav-dropdown-toggle" href="#"><i className="icon-puzzle"></i> Function</a>
+              <a className="nav-link nav-dropdown-toggle" href="#"><i className="icon-puzzle"></i> Refinery</a>
               <ul className="nav-dropdown-items">
                 <NavItem router={this.router} navigateTo={navigateTo} name="addfunc">
-                  <i className="icon-puzzle"></i> Add Function
+                  <i className="icon-puzzle"></i> Add Refinery
                 </NavItem>
               </ul>
             </li>

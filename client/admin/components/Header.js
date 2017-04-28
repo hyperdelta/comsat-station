@@ -11,10 +11,8 @@ export default function Header(props) {
           <li className="nav-item">
             <a className="nav-link navbar-toggler layout-toggler" href="#">&#9776;</a>
           </li>
-          ...
         </ul>
         <ul className="nav navbar-nav pull-right hidden-md-down">
-          ...
           <li className="nav-item">
             <a className="nav-link navbar-toggler aside-toggle" href="#">&#9776;</a>
           </li>
