@@ -6,6 +6,7 @@ import { actions } from 'redux-router5'
 import { setTitle } from '../../actions/breadcrumb';
 
 import PanelA from './PanelA';
+import PanelB from './PanelB';
 
 const reducerSelector = createSelector(
   state => state.breadcrumb,
@@ -37,8 +38,11 @@ class Dashboard extends Component {
 
     return (
       <div className="row">
-        <div className="col-md-8">
+        <div className="col-md-6">
           <PanelA></PanelA>
+        </div>
+        <div className="col-md-6">
+          <PanelB></PanelB>
         </div>
       </div>
     )
