@@ -1,12 +1,9 @@
 import React from 'react';
 
-import { render } from 'react-dom';
 import { Chart } from 'react-google-charts';
 
-
-export default class PanelB extends React.Component {
-  render() {
-    return (
+export default function PanelA(props) {
+  return (
       <div className="card">
         <div className="card-header">
           Header
@@ -27,5 +24,4 @@ export default class PanelB extends React.Component {
         </div>
       </div>
     )
-  }
 }
