@@ -2,7 +2,7 @@ import React, { createElement } from 'react';
 import { connect } from 'react-redux';
 import { routeNodeSelector } from 'redux-router5';
 
-import AddFunc from './main/Refinery';
+import AddFunc from './management/Refinery';
 import Dashboard from './dashboard/Dashboard';
 
 import NotFound from './error/NotFound';
