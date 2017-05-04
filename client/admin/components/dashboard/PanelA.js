@@ -20,7 +20,8 @@ const data = [
   {sourcePosition: [-122.41669, 37.7853], targetPosition: [-122.41669, 37.781]}
 ];
 
-
+////////////////////////////////////////////////////////////////////////////////
+// MAP CHART
 export default function PanelA(props) {
   return (
     <div className="card">

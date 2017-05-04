@@ -7,6 +7,7 @@ import { setTitle } from '../../actions/breadcrumb';
 
 import PanelA from './PanelA';
 import PanelB from './PanelB';
+import PanelC from './PanelC';
 
 const reducerSelector = createSelector(
   state => state.breadcrumb,
@@ -43,6 +44,9 @@ class Dashboard extends Component {
         </div>
         <div className="col-md-6">
           <PanelB></PanelB>
+        </div>
+        <div className="col-md-6">
+          <PanelC></PanelC>
         </div>
       </div>
     )
