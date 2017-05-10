@@ -13,7 +13,23 @@
   <link href="/assets/css/simple-line-icons.css" rel="stylesheet">
   <!-- Main styles for this application -->
   <link href="/assets/css/style.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
 </head>
+<script>
+    var socket = io.connect('/');
+    socket.on('todo:insert', function (data) {
+        console.log("NEW");
+        console.log(data);
+    });
+    socket.on('todo:update', function (data) {
+        console.log("UPDATE");
+        console.log(data);
+    });
+    socket.on('todo:delete', function (data) {
+        console.log("DELETE");
+        console.log(data);
+    });
+</script>
 <body class="navbar-fixed sidebar-nav fixed-nav">
 
 <div id="app"></div>
@@ -34,5 +50,6 @@
 <!-- Plugins and scripts required by this views -->
 <!-- Custom scripts required by this view -->
 <!--<script src="/assets/js/views/management.js"></script>-->
+
 </body>
 </html>
