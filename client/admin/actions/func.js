@@ -7,6 +7,7 @@ export function setNuser(nuser) {
 }
 
 export function setNfunc(nfunc) {
+
   return {
     type: 'SET_NFUNC',
     nfunc

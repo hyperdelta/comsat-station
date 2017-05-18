@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 
 import { router5Middleware, router5Reducer } from 'redux-router5';
+
+//reducers
 import breadcrumb from './reducers/breadcrumb';
 import func from './reducers/func';
 

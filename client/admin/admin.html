@@ -17,6 +17,8 @@
 </head>
 <script>
     var socket = io.connect('/');
+    socket.emit('register_refinery',{user_id:'test'});
+
     socket.on('todo:insert', function (data) {
         console.log("NEW");
         console.log(data);
