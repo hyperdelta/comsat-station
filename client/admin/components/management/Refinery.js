@@ -5,6 +5,7 @@ import { createSelector } from 'reselect';
 import { actions } from 'redux-router5'
 import { setTitle } from '../../actions/breadcrumb';
 import { setNuser, setNfunc, setFuncEnv, setFuncEnvVer, setFunc } from '../../actions/func';
+import { startRefinery, stopRefinery } from '../../repository/refinery';
 
 import request from 'superagent';
 
@@ -39,17 +40,32 @@ class AddFunc extends Component {
     setter(event.target.value);
   }
 
-  handleSubmit(event, func, navigateTo) {
-    //alert(JSON.stringify(func));
-    request
-      .post('/api/functions/create')
-      .send(func)
-      .end(function(err, res){
-        if(!err) {
-          alert('등록 요청 되었습니다. 상태를 봅시다');
-          navigateTo('dashboard');
-        }
-      });
+  submitStartRefinery(userId, timeInterval, query) {
+    startRefinery(userId, timeInterval, query, function(err, res) {
+      /*
+       {
+       "result" : "success",
+       "message" : "message, if fail",
+       "endpoint" : "rethinkdb endpoint",  /// 이건 형식이 약간 바뀔수 있음
+       "id" : "_id" /// close 할때 이걸 넘겨야 함
+       }
+       */
+      if(err) {
+        alert('정재소 동작에 실패했습니다. Cause: ' + err);
+      } else {
+        // TODO: rethink repo에 시작 상태값 삽입
+      }
+    })
+  }
+
+  submitStopRefinery(id) {
+    stopRefinery(id, function(err, res) {
+      if(err) {
+        alert('정재소 동작에 실패했습니다. Cause: ' + err);
+      } else {
+        // TODO: rethink repo에 시작 상태값을 완료로 갱신
+      }
+    });
   }
 
   render() {
