@@ -25,7 +25,9 @@ function hasCannotDeactivateError(error) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setTitle, setNuser, setNfunc, setFuncEnv, setFuncEnvVer, setFunc, navigateTo: actions.navigateTo }, dispatch);
+  return bindActionCreators({
+      setTitle, setNuser, setNfunc, setFuncEnv, setFuncEnvVer, setFunc, navigateTo: actions.navigateTo
+  }, dispatch);
 }
 
 class AddFunc extends Component {

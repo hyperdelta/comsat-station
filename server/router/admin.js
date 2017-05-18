@@ -7,4 +7,12 @@ router.get('/', function (req, res) {
 });
 
 
+/**
+ * API
+ */
+router.get('/', function (req, res) {
+    //refinery에 등록 요청 api
+});
+
+
 module.exports = router;
