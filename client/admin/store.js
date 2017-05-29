@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {router5Middleware, router5Reducer} from 'redux-router5';
 
@@ -8,20 +8,28 @@ import user from './reducers/user';
 import refinery from './reducers/refinery';
 import refineryForm from './reducers/refinery-form';
 
+
 export default function configureStore(router, initialState = {}) {
-    const createStoreWithMiddleware = applyMiddleware(
-        thunk,
-        router5Middleware(router)
-    )(createStore);
 
-    const store = createStoreWithMiddleware(combineReducers({
-        router: router5Reducer,
-        breadcrumb,
-        user,
-        refinery,
-        refineryForm
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    const store = createStore(
+        combineReducers({
+            router: router5Reducer,
+            breadcrumb,
+            user,
+            refinery,
+            refineryForm
 
-    }), initialState);
+        }),
+        initialState,
+        composeEnhancers(
+            applyMiddleware(
+                thunk,
+                router5Middleware(router)
+            )
+        )
+    );
+
 
     window.store = store;
     return store;

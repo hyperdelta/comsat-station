@@ -1,6 +1,8 @@
-export function setTitle(title) {
-  return {
-    type: 'SET_TITLE',
-    title
-  };
-}
+
+
+exports.setTitle = (title) => (dispatch, getState) => {
+    dispatch({
+        type: 'SET_TITLE',
+        title
+    });
+};

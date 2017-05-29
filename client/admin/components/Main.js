@@ -17,10 +17,6 @@ function hasCannotDeactivateError(error) {
   return error && error.code === 'CANNOT_DEACTIVATE' && error.segment === 'compose';
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ }, dispatch);
-}
-
 class Main extends Component {
   constructor(props, context) {
     super(props, context);
@@ -43,5 +39,10 @@ class Main extends Component {
     )
   }
 }
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+    }
+};
 
 export default connect(reducerSelector, mapDispatchToProps)(Main);

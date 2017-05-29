@@ -1,9 +1,12 @@
 const routes = {
-  routes: [
-    { name: 'addfunc', path: '/addfunc' },
-    { name: 'dashboard', path: '/dashboard' }
-  ],
-  defaultRoute: 'dashboard'
+    routes: [
+        {name: 'addRefinery', path: '/addRefinery'},
+        {name: 'dashboard', path: '/dashboard'},
+        {name: 'refinery', path: '/refinery', children: [
+            { name: 'id', path: '/:id'}
+        ]}
+    ],
+    defaultRoute: 'dashboard'
 };
 
 export default routes

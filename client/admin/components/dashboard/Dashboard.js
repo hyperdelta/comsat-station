@@ -5,9 +5,9 @@ import { createSelector } from 'reselect';
 import { actions } from 'redux-router5'
 import { setTitle } from '../../actions/breadcrumb';
 
-import PanelA from './PanelA';
-import PanelB from './PanelB';
-import PanelC from './PanelC';
+import Map from '../chart/Map';
+import Scatter from '../chart/Scatter';
+import Line from '../chart/Line';
 
 const reducerSelector = createSelector(
   state => state.breadcrumb,
@@ -22,9 +22,6 @@ function hasCannotDeactivateError(error) {
   return error && error.code === 'CANNOT_DEACTIVATE' && error.segment === 'compose';
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setTitle, navigateTo: actions.navigateTo }, dispatch);
-}
 
 class Dashboard extends Component {
   constructor(props, context) {
@@ -40,17 +37,55 @@ class Dashboard extends Component {
     return (
       <div className="row">
         <div className="col-md-6">
-          <PanelA></PanelA>
+            <div className="card">
+                <div className="card-header">
+                    Header
+                </div>
+                <div className="card-block">
+                    <Map />
+                </div>
+                <div className="card-footer">
+                    Footer
+                </div>
+            </div>
         </div>
         <div className="col-md-6">
-          <PanelB></PanelB>
+            <div className="card">
+                <div className="card-header">
+                    Header
+                </div>
+                <div className="card-block">
+                    <Scatter />
+                </div>
+                <div className="card-footer">
+                    Footer
+                </div>
+            </div>
         </div>
         <div className="col-md-6">
-          <PanelC></PanelC>
+            <div className="card">
+                <div className="card-header">
+                    Header
+                </div>
+                <div className="card-block">
+                    <Line />
+                </div>
+                <div className="card-footer">
+                    Footer
+                </div>
+            </div>
+
         </div>
       </div>
     )
   }
 }
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        setTitle: (title) => dispatch(setTitle(title)),
+        navigateTo: (name) => dispatch(actions.navigateTo(name)),
+    }
+};
 
 export default connect(reducerSelector, mapDispatchToProps)(Dashboard);
