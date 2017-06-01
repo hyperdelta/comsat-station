@@ -18,7 +18,7 @@ module.exports = function (socket) {
     //client 에서 refinery 등록 event 발생시 rethink changefeed  등록
     socket.on('register_refinery',function(data){
         console.log('register_refinery',data);
-        rConnection.connectDatabase(rConfig.comsat_station.database, function(err, connection){
+        rConnection.connectDatabase(rConfig.comsat_station, function(err, connection){
 
             //rethink connection 성공 시
             if(!err){
