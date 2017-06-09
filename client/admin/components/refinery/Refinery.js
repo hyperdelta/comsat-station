@@ -14,6 +14,7 @@ const reducerSelector = createSelector(
     state => state.router,
     (breadcrumb, router) => ({
         title: breadcrumb.title,
+        route: router.route,
         error: hasCannotDeactivateError(router.transitionError)
     })
 );
@@ -29,10 +30,13 @@ class Refinery extends Component {
         this.router = context.router;
         const { setTitle } = this.props;
         setTitle('Refinery');
+
+
     }
 
     render() {
-        const { navigateTo } = this.props;
+        const { navigateTo, route } = this.props;
+        console.log(route.params.id);
 
         return (
             <div>
