@@ -5,7 +5,9 @@
 module.exports =  {
 
     comsat_station: {
-        database: 'comsat_station',
-        table: 'cs_test'
+        db: 'comsat_station',
+        host: 'localhost',
+        port: 28015
+
     }
 };

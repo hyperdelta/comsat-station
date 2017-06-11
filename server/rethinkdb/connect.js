@@ -9,9 +9,9 @@ var r = require('rethinkdb');
 module.exports =  {
 
     //db연결
-    connectDatabase: function(database, callback){
+    connectDatabase: function(config, callback){
 
-        r.connect({ db: database })
+        r.connect(config)
             .then(function(connection) {
                 callback(null, connection);
             })

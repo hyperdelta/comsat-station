@@ -16,6 +16,7 @@ const reducerSelector = createSelector(
     (breadcrumb, refinery, router) => ({
         title: breadcrumb.title,
         refinery: refinery,
+        route: router.route,
         error: hasCannotDeactivateError(router.transitionError)
     })
 );
@@ -31,10 +32,12 @@ class Refinery extends Component {
         this.router = context.router;
         const { setTitle } = this.props;
         setTitle('Refinery');
+
+
     }
 
     render() {
-        const { navigateTo, refinery } = this.props;
+        const { navigateTo, refinery, route } = this.props;
         let wi = parent.innerWidth - 230;
         let he = parent.innerHeight;
 
