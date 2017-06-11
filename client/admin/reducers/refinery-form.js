@@ -29,7 +29,9 @@ const initialState = {
         and: [],
         or: []
     },
-    groupBy: []
+    groupBy: [],
+    //test query
+    query: '{"interval":10,"_userId":"tester","select":[{"column":"AuthPayPrice","operation":"avg","as":"auth_pay_price_avg"}],"groupBy":[{"column":"ShippingAddress","depth":2}],"where":{"column":"AuthPayPrice","operation":"gte","value":"0"}}'
 };
 
 export default function refineryForm(state = initialState, action) {
@@ -58,6 +60,11 @@ export default function refineryForm(state = initialState, action) {
             return {
                 ...state,
                 groupBy: action.groupBy
+            };
+        case 'SET_QUERY_CONDITION':
+            return {
+                ...state,
+                query: action.query
             };
         default:
             return state;

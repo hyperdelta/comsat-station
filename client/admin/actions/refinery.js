@@ -46,7 +46,16 @@ exports.setGroupByCondition = (groupBy) => (dispatch, getState) => {
     });
 };
 
-
+/**
+ * refinery query condition 저장
+ * @param query
+ */
+exports.setQueryCondition = (query) => (dispatch, getState) => {
+    dispatch({
+        type: 'SET_QUERY_CONDITION',
+        query
+    });
+};
 
 
 /**
@@ -68,28 +77,29 @@ exports.addRefinery = () => (dispatch, getState) => {
     const state = getState();
 
     //2. 세팅한 refinery 정보로 refinery api 호출
-    var req = {
+    /*var req = {
         _userId: state.refineryForm.userId,
         interval: state.refineryForm.interval,
         select: state.refineryForm.select,
         where: state.refineryForm.where,
         groupby: state.refineryForm.groupBy
-    };
+    };*/
+    var req = state.refineryForm.query;
 
     request
-        .post('/admin/ddRefinery')
+        .post('/admin/addRefinery')
         .send(req)
         .end(function(err, res) {
-            cb(err, res);
+            // cb(err, res);
+            //3. api 호출 성공하면 socketio 등록 이벤트 발생시키기
+            socket.emit('register_refinery',{refinery_id:'test'});
+
+            //등록한 refineryId 저장
+            dispatch({
+                type: 'SET_REFINERY_ID',
+                refineryId: 'test'
+            });
         });
-
-    //3. api 호출 성공하면 socketio 이벤트 발생시키기
-    //socket.emit('register_refinery',{user_id:'test'});
-
-    // dispatch({
-    //       type: 'SET_NUSER',
-    //       nuser
-    //   });
 };
 
 

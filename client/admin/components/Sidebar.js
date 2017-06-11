@@ -41,7 +41,10 @@ class Sidebar extends Component {
                         <NavItem router={this.router} navigateTo={navigateTo} name="dashboard">
                             <i className="icon-speedometer"></i> Dashboard
                         </NavItem>
-                        <li className="nav-item nav-dropdown">
+                        <NavItem router={this.router} navigateTo={navigateTo} name="refinery">
+                            <i className="icon-puzzle"></i> Refinery
+                        </NavItem>
+                        {/*<li className="nav-item nav-dropdown">
                             <a className="nav-link nav-dropdown-toggle" href="#"><i className="icon-puzzle"></i>
                                 Refinery</a>
                             <ul className="nav-dropdown-items">
@@ -52,7 +55,7 @@ class Sidebar extends Component {
                                     <i className="icon-puzzle"></i> Refinery2
                                 </NavItem>
                             </ul>
-                        </li>
+                        </li>*/}
                         <li className="nav-title">
                             Management
                         </li>

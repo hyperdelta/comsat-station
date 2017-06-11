@@ -2,6 +2,9 @@ import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {router5Middleware, router5Reducer} from 'redux-router5';
 
+//socketio events
+import socketioEvents from './actions/socketio'
+
 //reducers
 import breadcrumb from './reducers/breadcrumb';
 import user from './reducers/user';
@@ -29,6 +32,9 @@ export default function configureStore(router, initialState = {}) {
             )
         )
     );
+
+    //bind socket events
+    socketioEvents(store);
 
 
     window.store = store;

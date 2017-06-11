@@ -11,9 +11,11 @@ import Line from '../chart/Line';
 
 const reducerSelector = createSelector(
     state => state.breadcrumb,
+    state => state.refinery,
     state => state.router,
-    (breadcrumb, router) => ({
+    (breadcrumb, refinery, router) => ({
         title: breadcrumb.title,
+        refinery: refinery,
         error: hasCannotDeactivateError(router.transitionError)
     })
 );
@@ -32,12 +34,13 @@ class Refinery extends Component {
     }
 
     render() {
-        const { navigateTo } = this.props;
+        const { navigateTo, refinery } = this.props;
+        let wi = parent.innerWidth - 230;
+        let he = parent.innerHeight;
 
         return (
             <div>
-                <Map />
-                {/*<Line />*/}
+                <Map width={wi} height={he} mapData={refinery.refineries}/>
             </div>
         )
     }
