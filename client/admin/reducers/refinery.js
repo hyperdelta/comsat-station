@@ -7,8 +7,8 @@ import {
  */
 
 const initialState = {
-    //user_id는 임시로 tester라고 하자
-    user_id: 'tester',
+    //userId 임시로 tester라고 하자
+    userId: 'tester',
     refineryId: '',
     /* 아래와 같은 방식으로 feeding 받아옴
      * {
@@ -46,7 +46,7 @@ const initialState = {
 
 export default function refinery(state = initialState, action) {
     switch (action.type) {
-        case 'SET_REFINERY_ID':
+        case 'SET_REFINERY_INFO':
             return {
                 ...state,
                 refineryId: action.refineryId

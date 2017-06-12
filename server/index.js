@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 app.use('/', router);
 
 //server 시작
-var port = process.argv[2] || 3000;
+var port = process.argv[2] || 4000;
 var server = require('http').Server(app).listen(port, function () {
     console.log('Example app listening on '+port)
 });

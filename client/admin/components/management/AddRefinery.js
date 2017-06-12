@@ -6,6 +6,7 @@ import {setTitle} from '../../actions/breadcrumb';
 import {
     setInterval,
     addRefinery,
+    closeRefinery,
     setSelectCondition,
     setWhereCondition,
     setGroupByCondition,
@@ -109,6 +110,11 @@ class AddRefinery extends Component {
                                 <i className="fa fa-dot-circle-o">
                                 </i> Submit
                             </button>
+                            <button type="submit" className="btn btn-sm btn-primary"
+                                    onClick={() => closeRefinery()}>
+                                <i className="fa fa-dot-circle-o">
+                                </i> Close
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -126,6 +132,7 @@ let mapDispatchToProps = (dispatch) => {
         setQueryCondition: (query) => dispatch(setQueryCondition(query)),
         setTitle: (title) => dispatch(setTitle(title)),
         addRefinery: () => dispatch(addRefinery()),
+        closeRefinery: () => dispatch(closeRefinery()),
     }
 };
 
