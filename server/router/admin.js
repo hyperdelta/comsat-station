@@ -15,7 +15,7 @@ var rConfig = require('../config/refinery');
 router.get('/addRefinery', function (req, res) {
     //refinery에 등록 요청 api
     request
-        .post(rConfig.refineryApi + '/path')
+        .post(rConfig.refineryApi + '/_register')
         .send(req)
         .end(function (err, res) {
             //TODO

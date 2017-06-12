@@ -54,7 +54,8 @@ export default function refinery(state = initialState, action) {
         case 'SET_REFINERY_DATA_INSERT':
             return {
                 ...state,
-                refineries: state.refineries.push(action.data.mapData)
+                refineries: action.data.mapData
+                // refineries: state.refineries.push(action.data.mapData)
             };
         // case 'SET_REFINERY_DATA_UPDATE':
         //     return {
