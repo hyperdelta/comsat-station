@@ -1,12 +1,20 @@
 import React, {Component} from 'react'
-
+import LayerInfo from './LayerInfo';
 import MapboxGLMap from 'react-map-gl';
 import DeckGL, {GridLayer, experimental} from 'deck.gl';
+// import {Matrix4} from 'luma.gl';
 const {get} = experimental;
+
 
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiZ2V1bmhvIiwiYSI6ImNqMjFnNGhxdjAwMGczNG11aWV4eHlyeTAifQ.FGLCPrGrPIixpDu2tF1NyA';
 
-
+const sampleKorData = [
+    {ADDRESS:"서울시",LOCATION_NAME:"고속터미널",RACKS:2,SPACES:400,PLACEMENT:"SE",MO_INSTALLED:8,YR_INSTALLED:1997,COORDINATES:[127.004904, 37.505144]},
+    {"ADDRESS":"서울시","LOCATION_NAME":"서울시","RACKS":2,"SPACES":4,"PLACEMENT":"SE","MO_INSTALLED":8,"YR_INSTALLED":1997,"COORDINATES":[126.98955, 37.5651]},
+    {"ADDRESS":"역삼역","LOCATION_NAME":"역삼역","RACKS":3,"SPACES":10,"PLACEMENT":"SW","MO_INSTALLED":9,"YR_INSTALLED":1998,"COORDINATES":[127.036957, 37.501040]},
+    {"ADDRESS":"정자역","LOCATION_NAME":"정자역","RACKS":5,"SPACES":10,"PLACEMENT":"SW","MO_INSTALLED":10,"YR_INSTALLED":2000,"COORDINATES":[127.108090, 37.366242]},
+    {"ADDRESS":"광화문역","LOCATION_NAME":"광화문역","RACKS":10,"SPACES":8,"PLACEMENT":"SW","MO_INSTALLED":8,"YR_INSTALLED":1997,"COORDINATES":[126.976436, 37.571874]},
+];
 const sampleData = [
     {"ADDRESS":"939 ELLIS ST","LOCATION_NAME":"Bay Area Air Quality Management District (BAAQMD)","RACKS":2,"SPACES":4,"PLACEMENT":"SW","MO_INSTALLED":8,"YR_INSTALLED":1997,"COORDINATES":[-122.42177834,37.78346622]},
     {"ADDRESS":"1380 HOWARD ST","LOCATION_NAME":"San Francisco Department of Public Health","RACKS":1,"SPACES":2,"PLACEMENT":"SW","MO_INSTALLED":null,"YR_INSTALLED":1998,"COORDINATES":[-122.414411,37.774458]},
@@ -254,7 +262,8 @@ const sampleData = [
 ];
 
 const LIGHT_SETTINGS = {
-    lightsPosition: [-122.45, 37.66, 8000, -122.0, 38.00, 8000],
+    // lightsPosition: [-122.45, 37.66, 8000, -122.0, 38.00, 8000],
+    lightsPosition: [126.796866, 35.579972, 5000, 128.469616, 38.383788, 5000],//광주/ 강원도 고성
     ambientRatio: 0.3,
     diffuseRatio: 0.6,
     specularRatio: 0.4,
@@ -262,7 +271,7 @@ const LIGHT_SETTINGS = {
     numberOfLights: 2
 };
 
-const GridLayerExample = {
+let GridLayerExample = {
     layer: GridLayer,
     propTypes: {
         cellSize: {type: 'number', min: 0, max: 1000},
@@ -277,7 +286,7 @@ const GridLayerExample = {
         // defined the function outside and pass in here
         // so it doesn't generate a new function on every render
         getColorValue,
-        cellSize: 200,
+        cellSize: 800,
         opacity: 1,
         extruded: true,
         pickable: true,
@@ -298,7 +307,8 @@ function getMean(pts, key) {
 // outside props, so it doesn't create a new function on
 // every rendering pass
 function getColorValue(points) {
-    return getMean(points, 'SPACES');
+    return points.length;
+    // return getMean(points, 'SPACES');
 }
 
 
@@ -307,9 +317,14 @@ class PanelA extends Component {
         super(props);
         this.state = {
             mapViewState: {
-                latitude: 37.751537058389985,
-                longitude: -122.42694203247012,
-                zoom: 11.5,
+                //예제 코드 좌표
+                // latitude: 37.751537058389985,
+                // longitude: -122.42694203247012,
+                //
+                //서울 위경도
+                latitude: 37.5651,
+                longitude: 126.98955,
+                zoom: 9,
                 pitch: 30,
                 bearing: 0,
                 visible: true
@@ -376,35 +391,63 @@ class PanelA extends Component {
         return new Layer(layerProps);
     }
 
+    /*_getModelMatrix(index, offsetMode) {
+        // the rotation controls works only for layers in
+        // meter offset projection mode. They are commented out
+        // here since layer browser currently only have one layer
+        // in this mode.
+
+        // const {settings: {separation, rotationZ, rotationX}} = this.state;
+        const {settings: {separation}} = this.state;
+        // const {mapViewState: {longitude, latitude}} = this.props;
+        // const modelMatrix = new Matrix4().fromTranslation([0, 0, 1000 * index * separation]);
+
+        const modelMatrix = new Matrix4()
+            .fromTranslation([0, 0, 1000 * index * separation]);
+
+        // if (offsetMode) {
+        //   modelMatrix.rotateZ(index * rotationZ * Math.PI);
+        //   modelMatrix.rotateX(index * rotationX * Math.PI);
+        // }
+
+        return modelMatrix;
+    }*/
+
     render() {
 
-        let {mapViewState} = this.state;
+        let {mapViewState, hoveredItem, clickedItem} = this.state;
         let pickingRadius = 0;
-        let wi = parent.innerWidth;
-        let he = parent.innerHeight;
+
+        let {width, height} = this.props;
+
+        //reducer map data 저장
+        GridLayerExample.props.data = this.props.mapData;
 
         return (
-            <MapboxGLMap
-                mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN || 'no_token'}
-                width={wi} height={he}
-                perspectiveEnabled
-                { ...mapViewState }
-                onChangeViewport={this._onViewportChanged}>
+            <div>
+                <MapboxGLMap
+                    mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN || 'no_token'}
+                    width={width} height={height}
+                    perspectiveEnabled
+                    { ...mapViewState }
+                    onChangeViewport={this._onViewportChanged}>
 
-                <DeckGL
-                    debug
-                    id="default-deckgl-overlay"
-                    width={wi} height={he}
-                    {...mapViewState}
-                    pickingRadius={pickingRadius}
-                    onWebGLInitialized={ this._onWebGLInitialized }
-                    onLayerHover={ this._onHover }
-                    onLayerClick={ this._onClick }
-                    layers={[this._renderExampleLayer(GridLayerExample)]}
-                    effects={[]}
-                />
+                    <DeckGL
+                        debug
+                        id="default-deckgl-overlay"
+                        width={width} height={height}
+                        {...mapViewState}
+                        pickingRadius={pickingRadius}
+                        onWebGLInitialized={ this._onWebGLInitialized }
+                        onLayerHover={ this._onHover }
+                        onLayerClick={ this._onClick }
+                        layers={[this._renderExampleLayer(GridLayerExample)]}
+                        effects={[]}
+                    />
 
-            </MapboxGLMap>
+                </MapboxGLMap>
+                <LayerInfo ref="infoPanel" hovered={hoveredItem} clicked={clickedItem} />
+            </div>
 
         )
     }

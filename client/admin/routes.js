@@ -8,7 +8,7 @@ const routes = {
         //     { name: 'id', path: '/:id'}
         // ]}
     ],
-    defaultRoute: 'dashboard'
+    defaultRoute: 'refinery'
 };
 
 export default routes

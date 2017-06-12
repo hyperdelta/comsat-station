@@ -1,13 +1,16 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import beautify from 'json-beautify';
 import {connect} from 'react-redux'
 import {createSelector} from 'reselect';
 import {setTitle} from '../../actions/breadcrumb';
 import {
     setInterval,
     addRefinery,
+    closeRefinery,
     setSelectCondition,
     setWhereCondition,
-    setGroupByCondition
+    setGroupByCondition,
+    setQueryCondition
 } from '../../actions/refinery';
 
 
@@ -15,9 +18,11 @@ const reducerSelector = createSelector(
     state => state.breadcrumb,
     state => state.refinery,
     state => state.router,
-    (breadcrumb, refinery, router) => ({
+    state => state.refineryForm,
+    (breadcrumb, refinery, router,refineryForm) => ({
         title: breadcrumb.title,
         refinery: refinery,
+        refineryForm: refineryForm,
         error: hasCannotDeactivateError(router.transitionError)
     })
 );
@@ -36,7 +41,8 @@ class AddRefinery extends Component {
     }
 
     render() {
-        const {setInterval, addRefinery, setSelectCondition, setWhereCondition, setGroupByCondition} = this.props;
+        const {setInterval, addRefinery, setSelectCondition, setWhereCondition,
+            setGroupByCondition, setQueryCondition} = this.props;
 
         return (
             <div className="row">
@@ -47,7 +53,7 @@ class AddRefinery extends Component {
                         </div>
                         <div className="card-block">
                             <form action="" method="post" enctype="multipart/form-data" className="form-horizontal ">
-                                <div className="form-group row">
+                                {/*<div className="form-group row">
                                     <label className="col-md-3 form-control-label" for="text-input">Interval</label>
                                     <div className="col-md-9">
                                         <input type="text" id="nuser" name="nuser" className="form-control"
@@ -81,6 +87,18 @@ class AddRefinery extends Component {
                                         <textarea id="textarea-input" name="textarea-input" rows="9"
                                                   className="form-control"
                                                   onChange={(e) => setGroupByCondition(e.target.value)}>
+
+                                        </textarea>
+                                    </div>
+                                </div>*/}
+                                <div className="form-group row">
+                                    <label className="col-md-3 form-control-label" for="textarea-input">QUERY</label>
+                                    <div className="col-md-9">
+                                        <textarea id="textarea-input" name="textarea-input" rows="20"
+                                                  className="form-control"
+                                                  onChange={(e) => setQueryCondition(e.target.value)}>
+                                            {beautify(JSON.parse(this.props.refineryForm.query), null, 2, 80)}
+
                                         </textarea>
                                     </div>
                                 </div>
@@ -91,6 +109,11 @@ class AddRefinery extends Component {
                                     onClick={() => addRefinery()}>
                                 <i className="fa fa-dot-circle-o">
                                 </i> Submit
+                            </button>
+                            <button type="submit" className="btn btn-sm btn-primary"
+                                    onClick={() => closeRefinery()}>
+                                <i className="fa fa-dot-circle-o">
+                                </i> Close
                             </button>
                         </div>
                     </div>
@@ -106,8 +129,10 @@ let mapDispatchToProps = (dispatch) => {
         setSelectCondition: (select) => dispatch(setSelectCondition(select)),
         setWhereCondition: (where) => dispatch(setWhereCondition(where)),
         setGroupByCondition: (groupBy) => dispatch(setGroupByCondition(groupBy)),
+        setQueryCondition: (query) => dispatch(setQueryCondition(query)),
         setTitle: (title) => dispatch(setTitle(title)),
         addRefinery: () => dispatch(addRefinery()),
+        closeRefinery: () => dispatch(closeRefinery()),
     }
 };
 

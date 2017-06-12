@@ -22,11 +22,11 @@ module.exports = function (socket) {
 
             //rethink connection 성공 시
             if(!err){
-                // emit events for changes to todos
-                r.table('cs_test')
+                // emit events for changes to tester
+                r.table(data.refineryId)
                     .changes({ includeInitial: true, squash: true })
                     .run(connection)
-                    .then(changefeed(socket, 'todo'));
+                    .then(changefeed(socket, 'refinery'));
             }else{
 
             }
