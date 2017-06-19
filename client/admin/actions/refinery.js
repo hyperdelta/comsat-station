@@ -84,11 +84,13 @@ exports.addRefinery = () => (dispatch, getState) => {
         where: state.refineryForm.where,
         groupby: state.refineryForm.groupBy
     };*/
-    var req = state.refineryForm.query;
+    var query = state.refineryForm.query;
 
     request
         .post('/admin/addRefinery')
-        .send(req)
+        .send({
+            query: query
+        })
         .end(function(err, res) {
             // cb(err, res);
             //3. api 호출 성공하면 socketio 등록 이벤트 발생시키기
@@ -100,6 +102,7 @@ exports.addRefinery = () => (dispatch, getState) => {
                 refineryId: res.id // 나중에 종료 호출하기위해 필요함
             });
         });
+    // socket.emit('register_refinery',{refineryId:'tester'});
 };
 
 

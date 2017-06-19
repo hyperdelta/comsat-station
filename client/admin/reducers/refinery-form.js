@@ -64,7 +64,7 @@ export default function refineryForm(state = initialState, action) {
         case 'SET_QUERY_CONDITION':
             return {
                 ...state,
-                query: action.query
+                query: JSON.stringify(action.query)
             };
         default:
             return state;

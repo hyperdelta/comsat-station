@@ -3,24 +3,26 @@ import _ from 'lodash';
 import {LngLat} from '../data/const'
 const socket = io.connect('/');
 
-
 export default function(store) {
+
     //데이터 입력
     socket.on('refinery:insert', (data) => {
+        console.log('++refinery:insert', data);
         store.dispatch({
             type: 'SET_REFINERY_DATA_INSERT',
             data: refineData(data)
         });
     });
 
-    /*socket.on('refinery:update', function (data) {
+    socket.on('refinery:update', function (data) {
+        console.log('refinery:update', data);
         store.dispatch({
             type: 'SET_REFINERY_DATA_UPDATE',
             data: refineData(data)
         });
     });
 
-    socket.on('refinery:delete', function (data) {
+    /*socket.on('refinery:delete', function (data) {
         store.dispatch({
             type: 'SET_REFINERY_DATA_DELETE',
             data: refineData(data)
@@ -96,5 +98,5 @@ function refineData(rethinkdata){
  */
 function addressTextToLatLng(addressText){
 
-    return _.find(LngLat, (loc) => loc.text == addressText).lnglat;
+    return _.find(LngLat, (loc) => loc.text == _.trim(addressText)).lnglat;
 }

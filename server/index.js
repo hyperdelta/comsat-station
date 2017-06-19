@@ -24,7 +24,7 @@ var server = require('http').Server(app).listen(port, function () {
 var io = require('socket.io')(server);
 
 //on client connection
-io.on('connection', require('./socketio/refinery'));
+io.sockets.on('connection', require('./socketio/refinery'));
 
 
 

@@ -52,6 +52,7 @@ export default function refinery(state = initialState, action) {
                 refineryId: action.refineryId
             };
         case 'SET_REFINERY_DATA_INSERT':
+        case 'SET_REFINERY_DATA_UPDATE':
             return {
                 ...state,
                 refineries: action.data.mapData

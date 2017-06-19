@@ -1,6 +1,7 @@
 import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {router5Middleware, router5Reducer} from 'redux-router5';
+import socketMiddleware from './middleware/socketio'
 
 //socketio events
 import socketioEvents from './actions/socketio'
@@ -27,6 +28,7 @@ export default function configureStore(router, initialState = {}) {
         initialState,
         composeEnhancers(
             applyMiddleware(
+                // socketMiddleware,
                 thunk,
                 router5Middleware(router)
             )

@@ -13,10 +13,35 @@ router.get('/', function (req, res) {
  */
 var rConfig = require('../config/refinery');
 router.post('/addRefinery', function (req, res) {
+    var sampleQuery = {
+        "interval": 10,
+        "_userId": "tester",
+        "select": [
+            {
+                "column": "AuthPayPrice",
+                "operation": "avg",
+                "as": "auth_pay_price_avg"
+            }
+        ],
+        "groupBy": [
+            {
+                "column": "ShippingAddress",
+                "depth": 2
+            }
+        ],
+        "where": {
+            "column": "AuthPayPrice",
+            "operation": "gte",
+            "value": "0"
+        }
+    };
+
+    console.log(JSON.parse(req.body.query));
+
     //refinery에 등록 요청 api
     request
         .post(rConfig.refineryApi.url + '/_register')
-        .send(req.body)
+        .send(JSON.parse(req.body.query))
         .end(function (apierr, apires) {
             if (apierr) {
                 res.json(apierr);
@@ -32,10 +57,8 @@ router.post('/addRefinery', function (req, res) {
  */
 router.post('/closeRefinery', function (req, res) {
     request
-        .post(rConfig.refineryApi.url + '/_close')
-        .send({
-            id: req.body.id
-        })
+        .post(rConfig.refineryApi.url + '/_close/' + req.body.id)
+        .send()
         .end(function (apierr, apires) {
             if (apierr) {
                 res.json(apierr);
@@ -45,36 +68,6 @@ router.post('/closeRefinery', function (req, res) {
         });
 });
 
-var sampleQuery = {
-    "interval": 10,
-    "select": [
-        {
-            "column": "member_id",
-            "operation": "count",
-            "as": "member_id_count"
-        }
-    ],
-    "where": {
-        "and": [
-            {
-                "column": "payload.body.paymentData.NewSmilePay.TotalMoney",
-                "operation": "gte",
-                "value": "10000"
-            },
-            {
-                "column": "payload.body.paymentData.NewSmilePay.TotalMoney",
-                "operation": "lte",
-                "value": "100000"
-            }
-        ],
-        "or": null
-    },
-    "groupBy": [
-        {
-            "column": "payload.body.shippingAddressList.[0].DeliveryAddr1",
-            "depth": 2
-        }
-    ]
-};
+
 
 module.exports = router;
