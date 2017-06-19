@@ -1,3 +1,4 @@
+import _ from "lodash";
 import {
     DashboardType
 } from '../data/const';
@@ -56,7 +57,7 @@ export default function refinery(state = initialState, action) {
             return {
                 ...state,
                 // refineries: action.data.mapData
-                refineries: state.refineries.push(action.data.mapData)
+                refineries: _.concat(state.refineries, action.data.mapData)
             };
         // case 'SET_REFINERY_DATA_UPDATE':
         //     return {
